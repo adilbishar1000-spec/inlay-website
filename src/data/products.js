@@ -19,11 +19,20 @@ import p31 from '../assets/product31.jpeg';
 import p32 from '../assets/product32.jpeg';
 import p33 from '../assets/product33.jpeg';
 
-const generateProduct = (id, name, price, image, category) => ({
+import p11_1 from '../assets/product-11/PRODUCT 1.webp';
+import p11_2 from '../assets/product-11/PRODUCT 1.jpg';
+import p11_3 from '../assets/product-11/PRODUCT 1 (1).webp';
+
+import p12_1 from '../assets/product-12/angle1.JPG';
+import p12_2 from '../assets/product-12/angle2.JPG';
+import p12_3 from '../assets/product-12/angle3.JPG';
+
+const generateProduct = (id, name, price, image, category, images = null) => ({
   id: id.toString(),
   name,
   price: parseFloat(price.replace(/,/g, '')),
   image,
+  images: images || [image],
   category,
   material: "Marble stone",
   color: "White/Multicolor",
@@ -35,6 +44,8 @@ const generateProduct = (id, name, price, image, category) => ({
 });
 
 export const products = [
+  generateProduct(11, "Premium Marble Inlay Tabletop", "150000.00", p11, "Table top", [p11, p11_1, p11_2, p11_3]),
+  generateProduct(12, "Classic Marble Inlay Jewelry Box", "14500.00", p12, "Utility", [p12, p12_1, p12_2, p12_3]),
   generateProduct(1, "Blue flower 6 pcs marble coaster set with stand", "9540.00", p1, "Table top"),
   generateProduct(2, "Marble inlay Jewelry Storage box", "17130.00", p2, "Utility"),
   generateProduct(3, "Handcrafted White Marble Inlay Vintage Plate Floral", "7550.00", p3, "Home decor"),
@@ -45,8 +56,6 @@ export const products = [
   generateProduct(8, "Handmade Marble Inlay bowl set", "9450.00", p8, "Gift sets"),
   generateProduct(9, "Floral Marble Decorative Tray", "12200.00", p9, "Table top"),
   generateProduct(10, "Vintage Marble Coaster Set Red", "8900.00", p10, "Home decor"),
-  generateProduct(11, "Premium Marble Inlay Tabletop", "150000.00", p11, "Table top"),
-  generateProduct(12, "Classic Marble Inlay Jewelry Box", "14500.00", p12, "Utility"),
   generateProduct(20, "Marble Gift Set Classic", "20000.00", p20, "Gift sets"),
   generateProduct(21, "Premium Marble Decor", "18500.00", p21, "Home decor"),
   generateProduct(22, "Table Top Utility Box", "9200.00", p22, "Table top"),

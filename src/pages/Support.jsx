@@ -3,11 +3,35 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MapPin, ChevronDown } from 'lucide-react';
 
 const faqs = [
-  "Q1. Do you offer custom designs?",
-  "Q2. How long does it take to complete an order?",
-  "Q3. Do you ship across India?",
-  "Q4. Are the products handmade?",
-  "Q5. How can I track my order?"
+  {
+    question: "Q1. Do you offer custom designs?",
+    answer:
+      "Yes, we offer custom designs tailored to your preferences. Get in touch with us with your requirements and our team will guide you through the process."
+  },
+
+  {
+    question: "Q2. How long does it take to complete an order?",
+    answer:
+      "The timeline depends on the complexity of the product. Typically, it takes 7–14 business days. For custom orders, we will share the estimated time during confirmation."
+  },
+
+  {
+    question: "Q3. Do you ship across India?",
+    answer:
+      "Yes, we ship pan-India with secure and reliable delivery partners. Shipping charges and delivery time vary by location."
+  },
+
+  {
+    question: "Q4. Are the products handmade?",
+    answer:
+      "Absolutely! Every piece is 100% handcrafted by skilled artisans using traditional techniques passed down for generations."
+  },
+
+  {
+    question: "Q5. How can I track my order?",
+    answer:
+      "Once your order is shipped, you will receive a tracking link via email or WhatsApp to track your shipment in real time."
+  }
 ];
 
 const Support = () => {
@@ -176,7 +200,7 @@ const Support = () => {
                 `}
               >
                 <div className="flex justify-between items-center text-gray-800 font-medium">
-                  {faq}
+                  {faq.question}
                   <ChevronDown className={`transform transition-transform duration-300 ${activeFaq === index ? 'rotate-180' : ''}`} size={20} />
                 </div>
                 <AnimatePresence>
@@ -187,7 +211,7 @@ const Support = () => {
                       exit={{ height: 0, opacity: 0, marginTop: 0 }}
                       className="overflow-hidden text-gray-600 font-light"
                     >
-                      <p>This is a placeholder answer. You can replace this text with the actual details and procedures regarding {faq.replace(/^Q\d+\. /, '').toLowerCase()}.</p>
+                      <p>{faq.question}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

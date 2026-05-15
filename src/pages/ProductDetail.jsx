@@ -13,10 +13,12 @@ export default function ProductDetail() {
   const { id } = useParams();
   const product = products.find(p => p.id === id);
   const [activeTab, setActiveTab] = useState('description');
+  const [mainImageIndex, setMainImageIndex] = useState(0);
 
   // Scroll to top on load
   useEffect(() => {
     window.scrollTo(0, 0);
+    setMainImageIndex(0);
   }, [id]);
 
   if (!product) {
@@ -42,9 +44,13 @@ export default function ProductDetail() {
             initial="hidden" animate="visible" variants={fadeUpVariant}
             className="hidden lg:flex flex-col gap-4 w-[120px] flex-shrink-0"
           >
-            {[1, 2, 3].map((num) => (
-              <div key={num} className="bg-[#e6dfd5] aspect-square w-full rounded-sm overflow-hidden cursor-pointer hover:ring-2 hover:ring-[#6A2B32]/30 transition-all">
-                <img src={product.image} alt="Thumbnail" className="w-full h-full object-cover mix-blend-multiply" />
+            {product.images?.map((img, index) => (
+              <div 
+                key={index} 
+                onClick={() => setMainImageIndex(index)}
+                className={`bg-[#e6dfd5] aspect-square w-full rounded-sm overflow-hidden cursor-pointer transition-all ${mainImageIndex === index ? 'ring-2 ring-[#6A2B32]' : 'hover:ring-2 hover:ring-[#6A2B32]/30'}`}
+              >
+                <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover mix-blend-multiply" />
               </div>
             ))}
           </motion.div>
@@ -54,7 +60,7 @@ export default function ProductDetail() {
             initial="hidden" animate="visible" variants={fadeUpVariant}
             className="w-full lg:w-[600px] xl:w-[700px] flex-shrink-0 bg-[#e6dfd5] rounded-sm overflow-hidden"
           >
-             <img src={product.image} alt={product.name} className="w-full h-auto object-cover mix-blend-multiply" />
+             <img src={product.images ? product.images[mainImageIndex] : product.image} alt={product.name} className="w-full h-auto object-cover mix-blend-multiply" />
           </motion.div>
 
           {/* Details (Right) */}
