@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logoImg from '../assets/logo.png';
 
 const FacebookIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -25,7 +26,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-gray-200">
           
           <div className="lg:col-span-1">
-            <h3 className="font-serif text-4xl text-brand-maroon mb-2">INLAY</h3>
+            <Link to="/" className="inline-block mb-4">
+              <img src={logoImg} alt="The Inlay Co Logo" className="h-10 w-auto object-contain" />
+            </Link>
             <p className="text-gray-500 font-light mb-6">The inlay co</p>
             <div className="flex space-x-4 text-gray-800">
               <a href="#" className="hover:text-brand-maroon transition-colors"><FacebookIcon /></a>

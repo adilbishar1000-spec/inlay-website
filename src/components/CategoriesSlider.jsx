@@ -7,9 +7,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Link } from 'react-router-dom';
-import { products } from '../data/products';
 
-const categoryProducts = products.slice(0, 5);
+import imgGift from '../assets/Gift sets.jpg';
+import imgHome from '../assets/Home decor.JPG';
+import imgTable from '../assets/Table top.JPG';
+import imgUtility from '../assets/Utility.jpg';
+
+const categories = [
+  { id: 'gift', title: 'Gift sets', image: imgGift },
+  { id: 'home', title: 'Home decor', image: imgHome },
+  { id: 'table', title: 'Table top', image: imgTable },
+  { id: 'utility', title: 'Utility', image: imgUtility },
+];
 
 const CategoriesSlider = () => {
   const swiperRef = useRef(null);
@@ -42,19 +51,19 @@ const CategoriesSlider = () => {
           }}
           className="pb-12"
         >
-          {categoryProducts.map((product) => (
-            <SwiperSlide key={product.id}>
-              <Link to={`/product/${product.id}`} className="group relative aspect-square overflow-hidden cursor-pointer bg-[#f0ebe1] block">
+          {categories.map((category) => (
+            <SwiperSlide key={category.id}>
+              <Link to="/shop" className="group relative aspect-square overflow-hidden cursor-pointer bg-[#f0ebe1] block">
                 <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
+                  src={category.image} 
+                  alt={category.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 
                 {/* Default overlay hidden, shows on hover or active */}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-start p-6">
                   <h3 className="text-white font-serif text-2xl tracking-wider mb-1 line-clamp-2">
-                    {product.name}
+                    {category.title}
                   </h3>
                   <div className="mt-auto self-end bg-white text-gray-900 p-2 rounded-full transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                     <ArrowRight size={20} />

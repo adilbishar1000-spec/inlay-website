@@ -69,7 +69,7 @@ export default function ProductDetail() {
             <div className="w-full h-[1px] bg-[#333]/20 mb-6"></div>
             
             <h2 className="text-2xl font-bold text-[#333] mb-8">
-              ₹{product.price}
+              ₹{product.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
             </h2>
 
             <div className="space-y-4 text-[#444] text-[15px] tracking-wide mb-10 leading-relaxed font-medium">

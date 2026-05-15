@@ -22,23 +22,23 @@ const Support = () => {
       {/* Hero Section for Support */}
       <section className="relative pt-32 pb-48 md:pb-64 flex items-center justify-start overflow-hidden">
         {/* Background Image with slight zoom animation */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0"
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent z-10" /> 
-          <img 
-            src="/images/hero.jpg" 
-            alt="Artisan working on marble inlay" 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent z-10" />
+          <img
+            src="images/hero-support.png"
+            alt="Artisan working on marble inlay"
             className="w-full h-full object-cover object-center"
           />
         </motion.div>
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-6 z-20 w-full relative">
-          <motion.div 
+          <motion.div
             className="max-w-xl text-white"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ const Support = () => {
             </h1>
             <div className="w-16 h-[2px] bg-white/70 mb-6" />
             <p className="text-base md:text-lg text-white/90 leading-relaxed font-light drop-shadow-sm max-w-md">
-              We'd love to hear from you.<br/>
+              We'd love to hear from you.<br />
               Fill out the form or reach us directly through any of the options below
             </p>
           </motion.div>
@@ -59,7 +59,7 @@ const Support = () => {
 
       {/* Form and Contact Methods Section */}
       <section className="relative z-30 max-w-5xl mx-auto px-6 -mt-32 md:-mt-48 mb-20">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -67,20 +67,20 @@ const Support = () => {
         >
           <h2 className="text-4xl md:text-5xl font-serif text-gray-900 mb-2">Send us a message</h2>
           <p className="text-gray-600 mb-10 font-light">Fill out the form and we'll get back to you as soon as possible.</p>
-          
+
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-gray-700 font-medium text-sm mb-2">Full name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   className="w-full bg-transparent border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-brand-maroon transition-colors"
                 />
               </div>
               <div>
                 <label className="block text-gray-700 font-medium text-sm mb-2">Email address</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   className="w-full bg-transparent border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-brand-maroon transition-colors"
                 />
               </div>
@@ -99,12 +99,12 @@ const Support = () => {
             </div>
             <div>
               <label className="block text-gray-700 font-medium text-sm mb-2">Message</label>
-              <textarea 
+              <textarea
                 rows="5"
                 className="w-full bg-transparent border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-brand-maroon transition-colors resize-none"
               ></textarea>
             </div>
-            <button 
+            <button
               type="button"
               className="bg-brand-maroon text-white font-medium px-8 py-3.5 rounded-xl hover:bg-brand-maroon/90 transition-colors"
             >
@@ -114,7 +114,7 @@ const Support = () => {
         </motion.div>
 
         {/* Other ways to reach us */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -168,7 +168,7 @@ const Support = () => {
 
           <div className="space-y-3">
             {faqs.map((faq, index) => (
-              <div 
+              <div
                 key={index}
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                 className={`cursor-pointer rounded-xl px-6 py-5 transition-colors flex flex-col

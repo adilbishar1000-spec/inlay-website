@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, Search, ShoppingBag, Menu, X } from 'lucide-react';
 import clsx from 'clsx';
+import logoImg from '../assets/logo.png';
 
 const navLinks = [
   { name: 'ABOUT', path: '/about' },
@@ -42,8 +43,8 @@ const Header = () => {
 
         {/* Center: Main Logo */}
         <div className="flex-shrink-0 flex items-center justify-center lg:w-1/4">
-          <Link to="/" className="font-serif text-3xl font-semibold tracking-widest text-brand-maroon">
-            INLAY
+          <Link to="/" className="flex items-center justify-center">
+            <img src={logoImg} alt="The Inlay Co Logo" className="h-10 md:h-12 w-auto object-contain" />
           </Link>
         </div>
 

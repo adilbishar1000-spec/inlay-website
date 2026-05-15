@@ -57,7 +57,7 @@ const ProductCard = ({ product, index }) => {
           <h3 className="text-sm text-gray-800 leading-snug mb-2 font-medium hover:text-brand-maroon transition-colors line-clamp-2">
             {product.name}
           </h3>
-          <p className="text-gray-600 text-sm font-semibold">₹{product.price}</p>
+          <p className="text-gray-600 text-sm font-semibold">₹{product.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</p>
         </Link>
         <button 
           onClick={(e) => {
