@@ -211,7 +211,7 @@ const Support = () => {
                       exit={{ height: 0, opacity: 0, marginTop: 0 }}
                       className="overflow-hidden text-gray-600 font-light"
                     >
-                      <p>{faq.question}</p>
+                      <p>{faq.answer}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

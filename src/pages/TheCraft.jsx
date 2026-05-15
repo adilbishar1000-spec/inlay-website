@@ -53,10 +53,31 @@ export default function TheCraft() {
 
         {/* Floating Tag */}
         <div className="absolute top-40 right-6 md:right-16 z-20">
-          <div className="bg-[#6A2B32]/70 backdrop-blur-md text-white px-8 py-5 rounded-[40px] text-sm font-medium tracking-wide text-center lg:text-right shadow-xl">
-            Every piece tells a story<br/>
-            No two pieces are ever the same.
-          </div>
+      <motion.div
+  initial={{ 
+    opacity: 0,
+    x: 160,
+    filter: "blur(14px)"
+  }}
+  
+  animate={{ 
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)"
+  }}
+
+  transition={{
+    delay: .2,
+    duration: 2,
+    ease: [0.16, 1, 0.3, 1]
+  }}
+
+  className="bg-[#6A2B32]/70 backdrop-blur-md text-white px-8 py-5 rounded-[40px] text-sm font-medium tracking-wide text-center lg:text-right shadow-xl"
+>
+  Every piece tells a story
+  <br />
+  No two pieces are ever the same.
+</motion.div>
         </div>
 
         {/* Hero Content */}
