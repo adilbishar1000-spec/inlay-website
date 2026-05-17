@@ -11,7 +11,7 @@ const badges = [
 
 const Hero = () => {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-start overflow-hidden">
+    <section className="relative min-h-[700px] md:h-screen flex items-center justify-start overflow-hidden">
       {/* Background Image with slight zoom animation */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -48,22 +48,22 @@ const Hero = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 z-20 w-full mt-12">
+      <div className="max-w-[90%] md:max-w-xl text-white">
         <motion.div 
           className="max-w-xl text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif leading-tight mb-6 text-white drop-shadow-md">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif leading-[1.1] md:leading-tight mb-5 md:mb-6 text-white drop-shadow-md">
             The beauty of <br /> parchinkari
           </h1>
-          <p className="text-base md:text-lg text-white/90 mb-10 leading-relaxed font-light drop-shadow-sm max-w-md">
+          <p className="text-sm sm:text-base md:text-lg text-white/90 mb-8 md:mb-10 leading-relaxed font-light drop-shadow-sm max-w-md">
             Parchin Kari is the intricate art of inlaying semi-precious stones into marble. 
             A timeless tradition that transforms stone into stories.
           </p>
           
-          <Link to="/the-craft" className="w-fit group flex items-center space-x-3 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/40 text-white px-8 py-4 rounded-full transition-all duration-300">
+          <Link to="/the-craft" className="w-fit group flex items-center space-x-3 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/40 text-white px-5 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300">
             <span className="text-xs font-semibold tracking-widest uppercase">Discover the craft</span>
             <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
