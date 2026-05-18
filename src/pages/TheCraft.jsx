@@ -144,29 +144,6 @@ export default function TheCraft() {
             </p>
           </motion.div>
 
-	  {/* Step 6 */}
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVariant}>
-            <div className="overflow-hidden mb-6 aspect-[4/2.5] lg:aspect-[4/3]">
-              <img src={artboard9} alt="TIMELESS PIECE" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-            </div>
-            <h3 className="text-[15px] font-bold text-[#333] tracking-[0.1em] mb-3 uppercase">TIMELESS PIECE</h3>
-            <p className="text-[#555] leading-relaxed font-medium">
-              A unique creation, crafted with patience and passion, ready to be cherished forever.
-            </p>
-          </motion.div>
-
-	    {/* Step 5 */}
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVariant}>
-            <div className="overflow-hidden mb-6 aspect-[4/2.5] lg:aspect-[4/3]">
-              <img src={artboard8} alt="POLISHING" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-            </div>
-            <h3 className="text-[15px] font-bold text-[#333] tracking-[0.1em] mb-3 uppercase">POLISHING</h3>
-            <p className="text-[#555] leading-relaxed font-medium">
-              The surface is smoothed and polished to perfection, revealing the natural beauty of the stones.
-            </p>
-          </motion.div>
-
-
           {/* Step 2 */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVariant}>
             <div className="overflow-hidden mb-6 aspect-[4/2.5] lg:aspect-[4/3]">
@@ -200,8 +177,27 @@ export default function TheCraft() {
             </p>
           </motion.div>
 
-      
-        
+          {/* Step 5 */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVariant}>
+            <div className="overflow-hidden mb-6 aspect-[4/2.5] lg:aspect-[4/3]">
+              <img src={artboard8} alt="POLISHING" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+            </div>
+            <h3 className="text-[15px] font-bold text-[#333] tracking-[0.1em] mb-3 uppercase">POLISHING</h3>
+            <p className="text-[#555] leading-relaxed font-medium">
+              The surface is smoothed and polished to perfection, revealing the natural beauty of the stones.
+            </p>
+          </motion.div>
+
+          {/* Step 6 */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVariant}>
+            <div className="overflow-hidden mb-6 aspect-[4/2.5] lg:aspect-[4/3]">
+              <img src={artboard9} alt="TIMELESS PIECE" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+            </div>
+            <h3 className="text-[15px] font-bold text-[#333] tracking-[0.1em] mb-3 uppercase">TIMELESS PIECE</h3>
+            <p className="text-[#555] leading-relaxed font-medium">
+              A unique creation, crafted with patience and passion, ready to be cherished forever.
+            </p>
+          </motion.div>
 
         </div>
       </section>
