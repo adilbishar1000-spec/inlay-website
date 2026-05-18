@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Heart, Search, ShoppingBag, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import logoImg from '../assets/logo.png';
 
@@ -15,7 +16,19 @@ const navLinks = [
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,19 +63,43 @@ const Header = () => {
 
         {/* Right Side: Icons & Login */}
         <div className="flex items-center justify-end lg:w-1/4 space-x-6">
-          <button className="text-gray-800 hover:text-brand-maroon transition-colors">
-            <Heart strokeWidth={1.5} size={22} />
-          </button>
-          <button className="text-gray-800 hover:text-brand-maroon transition-colors">
+          <AnimatePresence>
+            {isSearchOpen && (
+              <motion.form 
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: 150, opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                className="hidden md:block overflow-hidden"
+                onSubmit={handleSearchSubmit}
+              >
+                <input 
+                  type="text" 
+                  autoFocus
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-transparent border-b border-gray-400 focus:border-brand-maroon outline-none text-sm py-1 px-2 text-gray-800 placeholder-gray-500"
+                />
+              </motion.form>
+            )}
+          </AnimatePresence>
+          
+          <button 
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            className="text-gray-800 hover:text-brand-maroon transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+          >
             <Search strokeWidth={1.5} size={22} />
           </button>
-          <button className="text-gray-800 hover:text-brand-maroon transition-colors relative">
+          <Link to="/wishlist" className="text-gray-800 hover:text-brand-maroon transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
+            <Heart strokeWidth={1.5} size={22} />
+          </Link>
+          <Link to="/cart" className="text-gray-800 hover:text-brand-maroon transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 relative group">
             <ShoppingBag strokeWidth={1.5} size={22} />
-            <span className="absolute -top-1 -right-1 bg-brand-maroon text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+            <span className="absolute -top-1 -right-1 bg-brand-maroon text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
               0
             </span>
-          </button>
-          <Link to="/login" className="hidden sm:block text-sm font-medium tracking-widest uppercase hover:text-brand-maroon transition-colors">
+          </Link>
+          <Link to="/login" className="hidden sm:block text-sm font-medium tracking-widest uppercase relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-maroon hover:after:w-full hover:text-brand-maroon transition-all duration-300 after:transition-all after:duration-300 hover:-translate-y-0.5">
             LOG-IN
           </Link>
           

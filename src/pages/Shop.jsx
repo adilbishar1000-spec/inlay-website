@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Heart, ChevronDown } from "lucide-react";
 import { products } from "../data/products";
@@ -17,10 +17,19 @@ export default function Shop() {
   
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
 
   const categories = ['All', 'Gift sets', 'Home decor', 'Table top', 'Utility'];
 
   let filteredProducts = [...products];
+
+  if (searchQuery) {
+    filteredProducts = filteredProducts.filter(p => 
+      p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
+
   if (categoryFilter !== 'All') {
     filteredProducts = filteredProducts.filter(p => p.category === categoryFilter);
   }
@@ -57,13 +66,26 @@ export default function Shop() {
 
           {/* Left Content */}
           <div className="relative z-10 p-12 md:p-16 lg:p-20 flex-1 flex flex-col justify-center">
-            <h1 className="text-5xl md:text-6xl lg:text-[72px] font-serif text-[#333] mb-6 leading-[1.1] tracking-wide">
-              Shop Handcrafted <br className="hidden lg:block" />
-              Inlay Creations
-            </h1>
-            <p className="text-[#555] text-lg font-medium leading-relaxed max-w-sm">
-              Timeless pieces of art, crafted by skilled hands and inspired by heritage.
-            </p>
+            {searchQuery ? (
+              <>
+                <h1 className="text-4xl md:text-5xl lg:text-[64px] font-serif text-[#333] mb-4 leading-[1.1] tracking-wide">
+                  Search Results
+                </h1>
+                <p className="text-[#555] text-lg font-medium leading-relaxed max-w-sm">
+                  Showing results for "{searchQuery}"
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="text-5xl md:text-6xl lg:text-[72px] font-serif text-[#333] mb-6 leading-[1.1] tracking-wide">
+                  Shop Handcrafted <br className="hidden lg:block" />
+                  Inlay Creations
+                </h1>
+                <p className="text-[#555] text-lg font-medium leading-relaxed max-w-sm">
+                  Timeless pieces of art, crafted by skilled hands and inspired by heritage.
+                </p>
+              </>
+            )}
           </div>
         </motion.div>
       </section>

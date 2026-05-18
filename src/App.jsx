@@ -25,6 +25,8 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/support" element={<Support />} />
           <Route path="/login" element={<Placeholder title="Log In" />} />
+          <Route path="/wishlist" element={<Placeholder title="Wishlist" />} />
+          <Route path="/cart" element={<Placeholder title="Cart" />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </main>

@@ -130,7 +130,7 @@ const Support = () => {
             </div>
             <button
               type="button"
-              className="bg-brand-maroon text-white font-medium px-8 py-3.5 rounded-xl hover:bg-brand-maroon/90 transition-colors"
+              className="bg-brand-maroon text-white font-medium px-8 py-3.5 rounded-xl transition-all duration-300 hover:bg-brand-maroon/90 hover:scale-105 hover:shadow-lg hover:-translate-y-1 active:scale-95"
             >
               Send your message
             </button>
