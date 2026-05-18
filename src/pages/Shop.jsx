@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Heart, ChevronDown } from "lucide-react";
 import { products } from "../data/products";
 import bannerImg from "../assets/hero-shop.jpeg"; // using a large image for banner
+import { useShop } from "../context/ShopContext";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
@@ -19,6 +20,7 @@ export default function Shop() {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
+  const { toggleWishlist, isInWishlist } = useShop();
 
   const categories = ['All', 'Gift sets', 'Home decor', 'Table top', 'Utility'];
 
@@ -68,20 +70,20 @@ export default function Shop() {
           <div className="relative z-10 p-12 md:p-16 lg:p-20 flex-1 flex flex-col justify-center">
             {searchQuery ? (
               <>
-                <h1 className="text-4xl md:text-5xl lg:text-[64px] font-serif text-[#333] mb-4 leading-[1.1] tracking-wide">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] font-serif text-[#333] mb-4 leading-[1.1] tracking-wide">
                   Search Results
                 </h1>
-                <p className="text-[#555] text-lg font-medium leading-relaxed max-w-sm">
+                <p className="text-[#555] text-base sm:text-lg font-medium leading-relaxed max-w-sm">
                   Showing results for "{searchQuery}"
                 </p>
               </>
             ) : (
               <>
-                <h1 className="text-5xl md:text-6xl lg:text-[72px] font-serif text-[#333] mb-6 leading-[1.1] tracking-wide">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-serif text-[#333] mb-4 sm:mb-6 leading-[1.1] tracking-wide">
                   Shop Handcrafted <br className="hidden lg:block" />
                   Inlay Creations
                 </h1>
-                <p className="text-[#555] text-lg font-medium leading-relaxed max-w-sm">
+                <p className="text-[#555] text-base sm:text-lg font-medium leading-relaxed max-w-sm">
                   Timeless pieces of art, crafted by skilled hands and inspired by heritage.
                 </p>
               </>
@@ -94,11 +96,11 @@ export default function Shop() {
       <section className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-10">
         <motion.div
           initial="hidden" animate="visible" variants={fadeUpVariant}
-          className="bg-[#EBE5DD] rounded-full px-8 py-4 flex items-center justify-between shadow-sm"
+          className="bg-[#EBE5DD] rounded-2xl sm:rounded-full px-6 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between shadow-sm gap-4 sm:gap-0"
         >
-          <div className="flex items-center space-x-6 text-[#444] font-semibold text-sm tracking-widest uppercase relative z-50">
+          <div className="flex items-center space-x-4 sm:space-x-6 text-[#444] font-semibold text-xs sm:text-sm tracking-widest uppercase relative z-50 w-full sm:w-auto justify-between sm:justify-start">
             <span>Filter</span>
-            <div className="w-[1px] h-5 bg-[#444]/30"></div>
+            <div className="w-[1px] h-5 bg-[#444]/30 hidden sm:block"></div>
             <div className="relative">
               <button 
                 onClick={() => setIsCategoryOpen(!isCategoryOpen)}
@@ -123,10 +125,10 @@ export default function Shop() {
             </div>
           </div>
           
-          <div className="relative z-50">
+          <div className="relative z-50 w-full sm:w-auto flex justify-between sm:justify-start pt-2 sm:pt-0 border-t border-[#444]/10 sm:border-t-0">
             <button 
               onClick={() => setIsSortOpen(!isSortOpen)}
-              className="flex items-center space-x-2 text-[#444] font-semibold text-sm tracking-widest uppercase hover:opacity-70 transition-opacity"
+              className="flex items-center space-x-2 text-[#444] font-semibold text-xs sm:text-sm tracking-widest uppercase hover:opacity-70 transition-opacity w-full sm:w-auto justify-between"
             >
               <span>{sortType === 'default' ? 'Sort by' : sortType === 'low-to-high' ? 'Low to High' : 'High to Low'}</span>
               <ChevronDown size={16} />
@@ -187,8 +189,11 @@ export default function Shop() {
                 </Link>
                 <div className="flex items-center justify-between mt-auto">
                   <span className="text-[#555] font-semibold text-sm">₹{product.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                  <button className="text-[#6A2B32] hover:scale-110 transition-transform">
-                    <Heart size={20} strokeWidth={1.5} />
+                  <button 
+                    onClick={() => toggleWishlist(product)}
+                    className={`hover:scale-110 transition-transform ${isInWishlist(product.id) ? 'text-[#6A2B32]' : 'text-[#888] hover:text-[#6A2B32]'}`}
+                  >
+                    <Heart size={20} strokeWidth={1.5} fill={isInWishlist(product.id) ? "currentColor" : "none"} />
                   </button>
                 </div>
               </div>

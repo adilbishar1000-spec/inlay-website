@@ -4,6 +4,7 @@ import { Heart, Search, ShoppingBag, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import logoImg from '../assets/logo.png';
+import { useShop } from '../context/ShopContext';
 
 const navLinks = [
   { name: 'ABOUT', path: '/about' },
@@ -20,6 +21,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+  const { cartCount } = useShop();
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +71,7 @@ const Header = () => {
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: 150, opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
-                className="hidden md:block overflow-hidden"
+                className="overflow-hidden absolute right-16 sm:right-32 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-none sm:relative sm:top-0 sm:translate-y-0 sm:right-0 z-50 px-2 sm:px-0 rounded-lg sm:rounded-none"
                 onSubmit={handleSearchSubmit}
               >
                 <input 
@@ -95,9 +97,11 @@ const Header = () => {
           </Link>
           <Link to="/cart" className="text-gray-800 hover:text-brand-maroon transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 relative group">
             <ShoppingBag strokeWidth={1.5} size={22} />
-            <span className="absolute -top-1 -right-1 bg-brand-maroon text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
-              0
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-brand-maroon text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">
+                {cartCount}
+              </span>
+            )}
           </Link>
           <Link to="/login" className="hidden sm:block text-sm font-medium tracking-widest uppercase relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-maroon hover:after:w-full hover:text-brand-maroon transition-all duration-300 after:transition-all after:duration-300 hover:-translate-y-0.5">
             LOG-IN

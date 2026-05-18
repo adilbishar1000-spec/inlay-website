@@ -9,7 +9,9 @@ import Gallery from './pages/Gallery';
 import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
 import Support from './pages/Support';
-import Placeholder from './pages/Placeholder';
+import Login from './pages/Login';
+import Cart from './pages/Cart';
+import Wishlist from './pages/Wishlist';
 
 function App() {
   return (
@@ -24,9 +26,9 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/support" element={<Support />} />
-          <Route path="/login" element={<Placeholder title="Log In" />} />
-          <Route path="/wishlist" element={<Placeholder title="Wishlist" />} />
-          <Route path="/cart" element={<Placeholder title="Cart" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </main>

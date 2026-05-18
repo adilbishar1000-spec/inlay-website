@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Heart, HandHeart, ShieldCheck, RefreshCw } from "lucide-react";
+import { Heart, HandHeart, ShieldCheck, RefreshCw, Check } from "lucide-react";
 import { products } from "../data/products";
+import { useShop } from "../context/ShopContext";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
@@ -14,6 +15,10 @@ export default function ProductDetail() {
   const product = products.find(p => p.id === id);
   const [activeTab, setActiveTab] = useState('description');
   const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
+  
+  const { addToCart, toggleWishlist, isInWishlist } = useShop();
 
   // Scroll to top on load
   useEffect(() => {
@@ -56,12 +61,30 @@ export default function ProductDetail() {
           </motion.div>
 
           {/* Main Image (Middle) */}
-          <motion.div 
-            initial="hidden" animate="visible" variants={fadeUpVariant}
-            className="w-full lg:w-[600px] xl:w-[700px] flex-shrink-0 bg-[#e6dfd5] rounded-sm overflow-hidden"
-          >
-             <img src={product.images ? product.images[mainImageIndex] : product.image} alt={product.name} className="w-full h-auto object-cover mix-blend-multiply" />
-          </motion.div>
+          <div className="w-full lg:w-[600px] xl:w-[700px] flex-shrink-0 flex flex-col gap-4">
+            <motion.div 
+              initial="hidden" animate="visible" variants={fadeUpVariant}
+              className="w-full bg-[#e6dfd5] rounded-sm overflow-hidden"
+            >
+               <img src={product.images ? product.images[mainImageIndex] : product.image} alt={product.name} className="w-full h-auto object-cover mix-blend-multiply" />
+            </motion.div>
+
+            {/* Mobile Thumbnails */}
+            <motion.div 
+              initial="hidden" animate="visible" variants={fadeUpVariant}
+              className="flex lg:hidden gap-3 overflow-x-auto pb-2 snap-x"
+            >
+              {product.images?.map((img, index) => (
+                <div 
+                  key={index} 
+                  onClick={() => setMainImageIndex(index)}
+                  className={`bg-[#e6dfd5] w-20 h-20 flex-shrink-0 rounded-sm overflow-hidden cursor-pointer transition-all snap-start ${mainImageIndex === index ? 'ring-2 ring-[#6A2B32]' : 'hover:ring-2 hover:ring-[#6A2B32]/30'}`}
+                >
+                  <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover mix-blend-multiply" />
+                </div>
+              ))}
+            </motion.div>
+          </div>
 
           {/* Details (Right) */}
           <motion.div 
@@ -90,19 +113,39 @@ export default function ProductDetail() {
             <div className="flex flex-col sm:flex-row items-center gap-6 mt-auto">
               {/* Quantity */}
               <div className="flex items-center justify-between border border-[#6A2B32] rounded-full px-6 py-3 w-full sm:w-[140px] text-[#6A2B32] font-medium text-lg">
-                <button className="hover:opacity-70">−</button>
-                <span>1</span>
-                <button className="hover:opacity-70">+</button>
+                <button 
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="hover:opacity-70 transition-opacity"
+                >−</button>
+                <span>{quantity}</span>
+                <button 
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="hover:opacity-70 transition-opacity"
+                >+</button>
               </div>
 
               {/* Add to Cart */}
-              <button className="bg-[#6A2B32] hover:bg-[#582128] text-white rounded-full px-8 py-3 w-full sm:flex-1 font-bold tracking-widest text-[13px] uppercase transition-colors shadow-sm">
-                Add to cart
+              <button 
+                onClick={() => {
+                  addToCart(product, quantity);
+                  setAdded(true);
+                  setTimeout(() => setAdded(false), 2000);
+                }}
+                className={`flex items-center justify-center gap-2 text-white rounded-full px-8 py-3 w-full sm:flex-1 font-bold tracking-widest text-[13px] uppercase transition-all duration-300 shadow-sm ${added ? 'bg-green-600 hover:bg-green-700' : 'bg-[#6A2B32] hover:bg-[#582128]'}`}
+              >
+                {added ? (
+                  <><Check size={18} /> Added to Cart</>
+                ) : (
+                  "Add to cart"
+                )}
               </button>
 
               {/* Heart */}
-              <button className="text-[#333] hover:text-[#6A2B32] transition-colors p-2">
-                <Heart size={32} strokeWidth={1.5} />
+              <button 
+                onClick={() => toggleWishlist(product)}
+                className={`transition-colors p-2 rounded-full hover:bg-gray-100 ${isInWishlist(product.id) ? 'text-[#6A2B32]' : 'text-[#333] hover:text-[#6A2B32]'}`}
+              >
+                <Heart size={32} strokeWidth={1.5} fill={isInWishlist(product.id) ? "currentColor" : "none"} />
               </button>
             </div>
 
